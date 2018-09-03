@@ -1,0 +1,4 @@
+# Ignore dotenv config.
+/.env
+
+/sitespeed-result
