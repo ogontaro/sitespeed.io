@@ -1,0 +1,21 @@
+{
+  "browsertime": {
+    "connectivity": {
+      "engine": "external",
+      "profile": "cable"
+    },
+    "iterations": 5,
+    "browser": "chrome",
+    "speedIndex": true
+  },
+  "graphite": {
+    "host": "127.0.0.1",
+    "namespace": "sitespeed_io.desktop"
+   },
+  "resultBaseURL": "https://www.sitespeed.io",
+  "video": true,
+  "gzipHAR": true,
+  "html": {
+    "fetchHARFiles": true
+  }
+}
