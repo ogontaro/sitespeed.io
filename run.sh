@@ -13,7 +13,7 @@ DOCKER_SETUP="--shm-size=1g --rm -v /home/ubuntu/sitespeed.io/config:/sitespeed.
 
 # Start running the tests
 # We run more tests on our test server but this gives you an idea of how you can configure it
-docker run $CABLE $DOCKER_SETUP $DOCKER_CONTAINER -n 11 --browsertime.viewPort 1920x1080 --browsertime.cacheClearRaw --browsertime.chrome.collectTracingEvents urls.txt $CONFIG
+docker run $CABLE $DOCKER_SETUP $DOCKER_CONTAINER -n 11 --browsertime.viewPort 1920x1080 --browsertime.cacheClearRaw --browsertime.chrome.collectTracingEvents /sitespeed.io/urls.txt $CONFIG
 docker run $CABLE $DOCKER_SETUP $DOCKER_CONTAINER -n 11 --browsertime.viewPort 1920x1080 /sitespeed.io/wikipedia.org.txt -b firefox $CONFIG
 docker run $THREEG $DOCKER_SETUP $DOCKER_CONTAINER --graphite.namespace sitespeed_io.emulatedMobile --browsertime.chrome.collectTracingEvents /sitespeed.io/m.wikipedia.org.txt -c 3g --mobile true $CONFIG
 
