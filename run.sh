@@ -18,7 +18,7 @@ docker run $CABLE $DOCKER_SETUP $DOCKER_CONTAINER -n 11 --browsertime.viewPort 1
 docker run $THREEG $DOCKER_SETUP $DOCKER_CONTAINER --graphite.namespace sitespeed_io.emulatedMobile url.txt -c 3g --mobile true $CONFIG
 
 # We remove all docker stuff to get a clean next run
-#docker system prune --all --volumes -f
+docker system prune --all --volumes -f
 
 # Get the container so we have it the next time we wanna use it
 docker pull $DOCKER_CONTAINER
