@@ -8,8 +8,8 @@ THREEG="--network 3g"
 CABLE="--network cable"
 
 # Simplify some configurations
-CONFIG="--config ./default.json"
-DOCKER_SETUP="--shm-size=1g --rm -v ./config:/sitespeed.io -v ./result:/result -v /etc/localtime:/etc/localtime:ro --name sitespeed"
+CONFIG="--config default.json"
+DOCKER_SETUP="--shm-size=1g --rm -v /home/ubuntu/sitespeed.io/config:/sitespeed.io -v /home/ubuntu/sitespeed.io/result:/result -v /etc/localtime:/etc/localtime:ro --name sitespeed"
 
 # Start running the tests
 # We run more tests on our test server but this gives you an idea of how you can configure it
