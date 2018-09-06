@@ -9,7 +9,7 @@ DOCKER_SETUP="--shm-size=1g --rm -v /home/ubuntu/sitespeed.io/config:/sitespeed.
 # Start running the tests
 # We run more tests on our test server but this gives you an idea of how you can configure it
 docker run $DOCKER_SETUP $DOCKER_CONTAINER -n 5 --browsertime.viewPort 1920x1080 urls.txt $CONFIG
-docker run $DOCKER_SETUP $DOCKER_CONTAINER --graphite.namespace sitespeed_io.emulatedMobile url.txt --mobile true $CONFIG
+docker run $DOCKER_SETUP $DOCKER_CONTAINER -n 5 --graphite.namespace sitespeed_io.emulatedMobile urls.txt --mobile true $CONFIG
 
 # We remove all docker stuff to get a clean next run
 docker system prune --all --volumes -f
