@@ -4,8 +4,9 @@
 ```
 cp .env.sample .env
 # edit .evn
-# edit config/default.json
-# edit config/urls.txt
+cp urls.txt.sample urls.sample
+# edit urls.txt
+# edit default.json
 ```
 
 ## run dashbard
