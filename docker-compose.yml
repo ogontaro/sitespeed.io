@@ -5,7 +5,7 @@ services:
       command: -V
       shm_size: 1g
       volumes:
-            - ./sitespeed-result/:/sitespeed.io/sitespeed-result
+        - ./sitespeed-result/:/sitespeed.io/sitespeed-result
     grafana:
       image: grafana/grafana:5.2.3
       depends_on:
