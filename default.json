@@ -9,7 +9,7 @@
     "speedIndex": true
   },
   "graphite": {
-    "host": "192.168.18.164",
+    "host": "__PUBLIC_GRAPHITE_ADDRESS__",
     "namespace": "sitespeed_io.desktop"
    },
   "resultBaseURL": "https://www.sitespeed.io",
