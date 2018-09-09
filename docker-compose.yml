@@ -1,49 +1,61 @@
 version: '3'
 services:
-    sitespeed.io:
-      image: sitespeedio/sitespeed.io
-      command: -V
-      shm_size: 1g
-      volumes:
-        - ./sitespeed-result/:/sitespeed.io/sitespeed-result
-    grafana:
-      image: grafana/grafana:5.2.3
-      depends_on:
-        - graphite
-      links:
-        - graphite
-      ports:
-        - "3000:3000"
-      environment:
-        - GF_SECURITY_ADMIN_PASSWORD=${SITESPEED_ADMIN_PASSWORD}
-        - GF_SECURITY_ADMIN_USER=${SITESPEED_ADMIN_USERNAME}
-        - GF_AUTH_ANONYMOUS_ENABLED=true
-        - GF_USERS_ALLOW_SIGN_UP=false
-        - GF_USERS_ALLOW_ORG_CREATE=false
-      volumes:
-        - grafana:/var/lib/grafana
-      restart: always
-    graphite:
-      image: sitespeedio/graphite:1.0.2-2-b
-      ports:
-        - "2003:2003"
-        - "8080:80"
-      restart: always
-      volumes:
-        - whisper:/opt/graphite/storage/whisper
-        # In production you should configure/map these to your container
-        # Download from https://github.com/sitespeedio/sitespeed.io/tree/master/docker/graphite
-        #- ./graphite/graphite.db:/opt/graphite/storage/graphite.db
-        #- ./graphite/conf/storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf
-        #- ./graphite/conf/storage-aggregation.conf:/opt/graphite/conf/storage-aggregation.conf
-        #- ./graphite/conf/carbon.conf:/opt/graphite/conf/carbon.conf
-    grafana-setup:
-      image: sitespeedio/grafana-bootstrap:7.0
-      links:
-        - grafana
-      environment:
-        - GF_PASSWORD=${SITESPEED_ADMIN_PASSWORD}
-        - GF_USER=${SITESPEED_ADMIN_USERNAME}
+  nginx:
+    build:
+      context: ./docker/nginx
+    links:
+      - grafana
+    volumes:
+      - ./sitespeed-result/:/sitespeed-result
+    ports:
+      - "80:80"
+    restart: always
+    environment:
+      - TZ=Asia/Tokyo
+  sitespeed.io:
+    image: sitespeedio/sitespeed.io
+    command: -V
+    shm_size: 1g
+    volumes:
+      - ./sitespeed-result/:/sitespeed.io/sitespeed-result
+  grafana:
+    image: grafana/grafana:5.2.3
+    depends_on:
+      - graphite
+    links:
+      - graphite
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${SITESPEED_ADMIN_PASSWORD}
+      - GF_SECURITY_ADMIN_USER=${SITESPEED_ADMIN_USERNAME}
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_USERS_ALLOW_ORG_CREATE=false
+    volumes:
+      - grafana:/var/lib/grafana
+    restart: always
+  graphite:
+    image: sitespeedio/graphite:1.0.2-2-b
+    ports:
+      - "2003:2003"
+      - "8080:80"
+    restart: always
+    volumes:
+      - whisper:/opt/graphite/storage/whisper
+      # In production you should configure/map these to your container
+      # Download from https://github.com/sitespeedio/sitespeed.io/tree/master/docker/graphite
+      #- ./graphite/graphite.db:/opt/graphite/storage/graphite.db
+      #- ./graphite/conf/storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf
+      #- ./graphite/conf/storage-aggregation.conf:/opt/graphite/conf/storage-aggregation.conf
+      #- ./graphite/conf/carbon.conf:/opt/graphite/conf/carbon.conf
+  grafana-setup:
+    image: sitespeedio/grafana-bootstrap:7.0
+    links:
+      - grafana
+    environment:
+      - GF_PASSWORD=${SITESPEED_ADMIN_PASSWORD}
+      - GF_USER=${SITESPEED_ADMIN_USERNAME}
 volumes:
     grafana:
     whisper:
