@@ -6,10 +6,12 @@ services:
     links:
       - grafana
     volumes:
-      - ./sitespeed-result/:/var/wwww/sitespeed-result
+      - ./sitespeed-result/:/sitespeed-result
     ports:
       - "80:80"
     restart: always
+    environment:
+      - TZ=Asia/Tokyo
   sitespeed.io:
     image: sitespeedio/sitespeed.io
     command: -V
