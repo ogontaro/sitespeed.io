@@ -3,7 +3,7 @@
 ## setup
 ```
 cp .env.sample .env
-# edit .evn
+# edit .env
 cp urls.txt.sample urls.sample
 # edit urls.txt
 # edit default.json
